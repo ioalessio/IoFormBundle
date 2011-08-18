@@ -1,0 +1,80 @@
+{% use 'form_div_layout.html.twig' %}
+{% block jquery_entity_combobox_widget %}
+
+  {{ block('choice_widget') }}
+  {% spaceless %}
+  <style>
+	.ui-button { margin-left: -1px; }
+	.ui-button-icon-only .ui-button-text { padding: 0.35em; }
+	.ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
+	</style>
+    <script type="text/javascript">
+      $(function(){
+        $( "#{{ id }}" ).autocomplete();
+      	$( "#{{ id }}" ).combobox();
+     });
+    </script>
+{% endspaceless %}
+{% endblock jquery_entity_combobox_widget %}
+
+
+{% block jquery_date_widget %}
+{% spaceless %}
+    {% if widget == 'single_text' %}
+        {{ block('field_widget') }}
+          <script>
+          $(function() {
+            $( "#{{ id }}" ).datepicker({
+                dateFormat: '{{ date_format }}'
+              });
+          });
+          </script>
+    {% else %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year),
+                '{{ month }}': form_widget(form.month),
+                '{{ day }}':   form_widget(form.day),
+            })|raw }}
+        </div>
+          <script>
+          $(function() {
+            $( "#{{ id }}" ).datepicker({
+                dateFormat: '{{ date_format }}'
+
+{#              dateformat: '{{ date_pattern|replace({
+                '{{ year }}':  "y",
+                '{{ month }}': "m",
+                '{{ day }}':   "d",
+            })|raw }}'
+#}
+
+              });
+          });
+          </script>
+    {% endif %}
+{% endspaceless %}
+{% endblock jquery_date_widget %}
+
+
+
+{% block jquery_range_widget %}
+{% spaceless %}
+        {{ block('field_widget') }}
+      <div id="{{ id }}_slider"></div>
+        <script>
+        $(function() {
+            $( "#{{ id }}_slider" ).slider({
+              value:{{ value }},
+              min: {{ min }},
+              max: {{ max }},
+              step: {{ step }},
+              slide: function( event, ui ) {
+                $( "#{{ id }}" ).val( ui.value );
+              }
+            });
+          });
+         </script>
+
+{% endspaceless %}
+{% endblock jquery_range_widget %}

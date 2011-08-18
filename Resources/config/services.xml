@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="io_form.example.class">Io\FormBundle\Example</parameter>
+    </parameters>
+
+    <services>
+        <service id="io_form.example" class="%io_form.example.class%">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+    <services>
+      <service id="form.type.ajax_entity" class="Io\FormBundle\Form\Extension\Type\AjaxEntityType">
+        <argument type="service" id="doctrine" />
+        <tag name="form.type" alias="ajax_entity" />
+      </service>
+      <service id="form.type.jquery_entity_combobox" class="Io\FormBundle\Form\Extension\Type\JqueryEntityComboboxType">
+        <argument type="service" id="doctrine" />
+        <tag name="form.type" alias="jquery_entity_combobox" />
+      </service>
+      <service id="form.type.jquery_date" class="Io\FormBundle\Form\Extension\Type\JqueryDateType">
+        <tag name="form.type" alias="jquery_date" />
+      </service>
+      <service id="form.type.jquery_range" class="Io\FormBundle\Form\Extension\Type\JqueryRangeType">
+        <tag name="form.type" alias="jquery_range" />
+      </service>
+    </services>
+</container>
