@@ -1,49 +1,36 @@
-<p>
-  A set of Form Types for symfony2 framework. <br />
-</p>
-<h1>How to Install:</h1>
-<ol>
-  <li>
-      <p>Add this bundle to your vendor/ dir</p>
-      <ul>
-        <li>
-            <h4>Vendor Mode</h4>:
-            <p>Add the following lines in your deps file:
 
-            <pre><code>
-                [IoFormBundle]
-                git://github.com/ioalessio/IoFormBundle.git
-                target=/bundles/Io/FormBundle
-            </code></pre>
-            </p>
-            <p>Run the vendor script:
-            <pre><code>
-                ./bin/vendors install
-            </code></pre>
-        </li>
+  A set of Form Types for symfony2 framework.
 
-        <li><h4>Submodule Mode</h4>
-          <pre><code>
-              git submodule add git://github.com/ioalessio/IoFormBundle.git vendor/bundles/Io/FormBundle
-          </code></pre>
-        </li>
-        </ul>
-        </li>
+How to Install
+==============
+  1. Add this bundle to your vendor/ dir
+    * Vendor Mode
+      Add the following lines in your deps file::
 
-   <li>
-      <p>Add the "Io" namespace to your autoloader:
-      <pre><code>
+        [IoFormBundle]
+        git://github.com/ioalessio/IoFormBundle.git
+        target=/bundles/Io/FormBundle
+
+
+      Run the vendor script:
+
+        ./bin/vendors install
+
+    * Submodule Mode
+       $ git submodule add git://github.com/ioalessio/IoFormBundle.git vendor/bundles/Io/FormBundle
+
+
+
+  2. Add the "Io" namespace to your autoloader:
+
         // app/autoload.php
         $loader->registerNamespaces(array(
         'Io' => __DIR__.'/../vendor/bundles',
         // your other namespaces
         ));
-        </code></pre>
 
-   </li>
-   <li>
-      <p>Add the "Io" namespace to your autoloader:
-      <pre><code>
+  3. Add the "Io" namespace to your autoloader:
+
         // app/ApplicationKernel.php
         public function registerBundles()
         {
@@ -53,25 +40,19 @@
                 // ...
             );
         }
-        </code></pre>
-        </p>
-   </li>
-   <li>
-      <p>Add the twig form configuration:
-      <pre><code>
+
+  4. Add the twig form configuration:
+
         // app/config/config.yml
         twig:
             form:
                 resources:
                     - 'IoFormBundle:Form:fields.html.twig'
-        </code></pre>
-        </p>
-   </li>
-</ul>
 
-<h1>How to use Form Type</h1>
-  <p>Build your form:
-  <pre><code>
+How to use Form Type
+====================
+  Build your form:
+
     ...
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -82,12 +63,11 @@
             ->add('note')
         );
     }
-    </code></pre>
-    </p>
 
-<h2>That's all!</h2>
+THAT'S ALL
+==========
 
-<p> <h2>WARNING: <h2>
-    Form Types use Jquery Library. <br />
+WARNING:
+    Form Types use Jquery Library.
     You must have jquery and jquery ui loaded in your template
-</p>
+
