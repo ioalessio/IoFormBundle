@@ -1,4 +1,3 @@
-
   A set of Form Types for symfony2 framework.
 
 How to Install
@@ -8,7 +7,7 @@ How to Install
       Add the following lines in your deps file::
 
         [IoFormBundle]
-        git://github.com/ioalessio/IoFormBundle.git
+        git=git://github.com/ioalessio/IoFormBundle.git
         target=/bundles/Io/FormBundle
 
 
