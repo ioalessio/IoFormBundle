@@ -2,6 +2,7 @@
 
 /**
  * Render a Jquery Combobox Select of an entity
+ * Important: you must include combobox.js to enable this widget
  */
 
 namespace Io\FormBundle\Form\Extension\Type;

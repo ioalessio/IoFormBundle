@@ -1,4 +1,4 @@
-  A set of Form Types for symfony2 framework.
+A set of Form Types for symfony2 framework using JQuery
 
 How to Install
 ==============
@@ -59,14 +59,14 @@ How to use Form Type
             ->add('user', 'jquery_entity_combobox', array('class' => 'Io\MyBundle\Entity\MyEntity'))
             ->add('date', 'jquery_date')
             ->add('int_field', 'jquery_range', array('min' => 0, 'max' => 50, 'step' => 2)
-            ->add('note')
+            ->add('note', 'jquery_tinymce')
         );
     }
 
 THAT'S ALL
 ==========
 
-WARNING:
-    Form Types use Jquery Library.
+WARNINGS:
+    Form Types uses last version of Jquery v1.6 and JQueryUI v1.8 Libraries
     You must have jquery and jquery ui loaded in your template
-
+    You must include tinymce library (v3.4.4) in your project ( download jquery version from http://www.tinymce.com/download/download.php )
