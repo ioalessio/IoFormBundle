@@ -1,0 +1,49 @@
+Roadmap for IoFormBundle
+
+ List of form types:
+
+  - radio:        Radio ( using jquery buttons style )
+
+  - tinymce:      Textarea Tinymce
+
+  - slider:       Slider for integer values
+
+  - datepicker:   Datepicker
+
+  - ajax_upload:
+
+  - image_manipolation: (crop, rotate, resize, slice.. etc a new ImageBundle should be manage these features)
+
+  <SELECT> Types:
+  - combobox:     Combobox of Entity (not ajax)
+                  This is a normal <select>. You can choose the <option> with typing your <option>
+
+  - autocomplete: Select a value of a Remote Entity with autocomplete.
+                  A classic autocomplete function. Remote call should be return a JSON value=>label list of values.
+
+  - tagging:      select/deselect many values using autocomplete function (like facebook/google+/wordpress tagging fields)
+
+
+  <drag&drop>
+  - sortable:
+    - tree management: (like wordpress menu administration)
+
+
+  - rating:
+      rating choice using a simple ui
+
+Clipboard:
+  - widget' javascript, stylesheets and external files (libraries and functions) should be included in a "javascript block"
+    and this block should be called in a developer's layout file
+
+  - use configuration file to define paths of libraries
+
+  - dynamic embed forms
+      (useful for oneToMany Entities, managing galleries, taxonomies, etc.)
+
+  - form events/callbacks
+
+  - create a adapter for different js libraries ( jquery, dojo, yui, prototype..)
+
+
+  every field (all form too?) should be have an automatic javascript validation
