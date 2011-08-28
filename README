@@ -48,6 +48,12 @@ How to Install
                 resources:
                     - 'IoFormBundle:Form:fields.html.twig'
 
+        io_form:
+            jquery_tinymce:
+              source: /bundles/yourbundle/js/tiny_mce/tiny_mce.js
+              theme:  simple
+
+
 How to use Form Type
 ====================
   Build your form:
@@ -68,5 +74,15 @@ THAT'S ALL
 
 WARNINGS:
     Form Types uses last version of Jquery v1.6 and JQueryUI v1.8 Libraries
-    You must have jquery and jquery ui loaded in your template
-    You must include tinymce library (v3.4.4) in your project ( download jquery version from http://www.tinymce.com/download/download.php )
+    You must have jquery and jquery ui already loaded in your template
+    You must include jquery tinymce library (v3.4.4) in your project ( http://www.tinymce.com/download/download.php )
+
+    #yourlayout.html.twig
+    <body>
+      ...
+      {% block js %}
+      <script type="text/javascript" src="{{ asset('path/js/jquery-ui-1.8.15.custom.min.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('path/js/js/combobox.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('path/js/js/tiny_mce/jquery.tinymce.js') }}"></script>
+      {% endblock %}
+    </body>

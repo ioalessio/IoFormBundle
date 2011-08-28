@@ -4,6 +4,7 @@ namespace Io\FormBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -18,8 +19,18 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('io_form');
+        $rootNode = $treeBuilder->root('io_form', 'array');
 
+        $rootNode
+                ->children()
+                ->arrayNode('jquery_tinymce')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->variableNode('source')->defaultValue('')->end()
+                        ->variableNode('theme')->defaultValue('simple')->end()
+
+                    ->end()
+        ;
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

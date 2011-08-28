@@ -85,23 +85,25 @@
 
 {% block jquery_tinymce_widget %}
           {{ block ('textarea_widget') }}
-        <script>
-        $(function(){
-          $("#{{ id }}").tinymce( {{ block('tinymce_configuration') }} );
-        });
-       </script>
+
+         <script>
+          $(function(){
+            $("#{{ id }}").tinymce( {{ block('tinymce_configuration') }} );
+          });
+          </script>
 
 {% endblock jquery_tinymce_widget %}
+
 
 {% block tinymce_configuration %}
 {% spaceless %}
 {
                 // Location of TinyMCE script
                 {# TODO: must use a configurable value for tinymce js asset #}
-                script_url : '{{ asset('bundles/ioef/js/tiny_mce/tiny_mce.js') }}',
+                script_url : '{{ jquery_tinymce_asset }}',
 
                 // General options
-                theme : "advanced",
+                theme : "{{ theme }}",
 
                 plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",
 
@@ -118,4 +120,4 @@
 
 {% endblock tinymce_configuration %}
 
-{# TODO: put all scripts into same block #}
+{# TODO: should be render all scripts into same block #}
