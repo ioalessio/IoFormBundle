@@ -29,7 +29,11 @@
           <script>
           $(function() {
             $( "#{{ id }}" ).datepicker({
-                dateFormat: '{{ date_format }}'
+                dateFormat: '{{ date_format }}',
+                changeMonth: {{ change_month }},
+		changeYear:  {{ change_year }},
+		minDate:  '{{ min_date }}',
+		maxDate:  '{{ max_date }}',
               });
           });
           </script>
