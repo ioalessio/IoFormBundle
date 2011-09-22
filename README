@@ -69,6 +69,12 @@ How to use Form Type
         );
     }
 
+ Several options are available on jquery_date widget
+  'changeMonth'=> 'true',
+  'changeYear' => true,
+  'minDate'=> '-1y',
+  'maxDate'=> '+1y'
+
 THAT'S ALL
 ==========
 
