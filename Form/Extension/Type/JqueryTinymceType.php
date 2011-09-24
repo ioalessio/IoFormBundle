@@ -44,7 +44,7 @@ class JqueryTinymceType extends TextareaType
       $options = parent::getDefaultOptions($options);
       $options['theme'] = isset($this->tinymce['theme']) ? $this->tinymce['theme'] : 'simple';
       //disable required option because html5 dind't parse tinymce input
-      //$options['required'] = false;
+      $options['required'] = false;
       return $options;
     }
 

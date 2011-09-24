@@ -53,6 +53,20 @@
 {% endblock jquery_date_widget %}
 
 
+{% block jquery_radio_widget %}
+{% spaceless %}
+          <div id="{{ id }}_buttonset">
+        {{ block('choice_widget') }}
+          </div>
+        <script>
+        $(function() {
+            $( "#{{ id }}_buttonset" ).buttonset();
+          });
+         </script>
+
+{% endspaceless %}
+{% endblock jquery_radio_widget %}
+
 
 {% block jquery_range_widget %}
 {% spaceless %}

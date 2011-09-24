@@ -18,9 +18,13 @@
         <tag name="form.type" alias="jquery_date" />
             <argument type="service" id="session" />
       </service>
-      
+
       <service id="form.type.jquery_range" class="Io\FormBundle\Form\Extension\Type\JqueryRangeType">
         <tag name="form.type" alias="jquery_range" />
+      </service>
+
+      <service id="form.type.jquery_radio" class="Io\FormBundle\Form\Extension\Type\JqueryRadioType">
+        <tag name="form.type" alias="jquery_radio" />
       </service>
 
       <service id="form.type.jquery_tinymce" class="Io\FormBundle\Form\Extension\Type\JqueryTinymceType">
