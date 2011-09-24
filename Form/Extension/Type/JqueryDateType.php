@@ -10,9 +10,16 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
-
+use Symfony\Component\HttpFoundation\Session;
 class JqueryDateType extends DateType
 {
+    /**
+     * @param Session $session
+     */
+    public function __construct(Session $session)
+    {
+      $this->session = $session;
+    }
     /**
      * {@inheritdoc}
      */
@@ -72,12 +79,14 @@ class JqueryDateType extends DateType
             }
         }
 
+
         $view->set('date_pattern', $pattern);
         $view->set('date_format', $this->convertJqueryDate($pattern));
         $view->set('change_month', $form->getAttribute('changemonth'));
         $view->set('change_year', $form->getAttribute('changeyear'));
         $view->set('min_date', $form->getAttribute('mindate'));
         $view->set('max_date', $form->getAttribute('maxdate'));
+        $view->set('locale',  $this->session->getLocale() );
     }
 
     protected function convertJqueryDate($pattern)

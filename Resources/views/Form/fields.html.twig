@@ -27,9 +27,6 @@
     {% if widget == 'single_text' %}
         {{ block('field_widget') }}
 
-{#
-          <script src="http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/jquery.ui.datepicker-it.js" ></script>
-#}
           <script>
           $(function() {
             $( "#{{ id }}" ).datepicker({
@@ -40,7 +37,7 @@
                 maxDate:  '{{ max_date }}',
                 showOn: "button"
               });
- {#             $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "it" ] );#}
+             $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "{{locale}}" ] );
           });
           </script>
     {% else %}
@@ -51,21 +48,6 @@
                 '{{ day }}':   form_widget(form.day),
             })|raw }}
         </div>
-          <script>
-          $(function() {
-            $( "#{{ id }}" ).datepicker({
-                dateFormat: '{{ date_format }}'
-
-{#              dateformat: '{{ date_pattern|replace({
-                '{{ year }}':  "y",
-                '{{ month }}': "m",
-                '{{ day }}':   "d",
-            })|raw }}'
-#}
-
-              });
-          });
-          </script>
     {% endif %}
 {% endspaceless %}
 {% endblock jquery_date_widget %}
@@ -111,7 +93,7 @@
                 // Location of TinyMCE script
                 {# TODO: must use a configurable value for tinymce js asset #}
                 script_url : '{{ jquery_tinymce_asset }}',
-
+                {#language : "{{ locale }}" didn't work if you haven't right localization #}
                 // General options
                 theme : "{{ theme }}",
 

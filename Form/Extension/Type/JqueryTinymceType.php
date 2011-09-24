@@ -13,14 +13,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session;
 
 class JqueryTinymceType extends TextareaType
 {
   public $tinymce;
 
-    public function __construct($tinymce)
+    public function __construct($tinymce, Session $session)
     {
       $this->tinymce = $tinymce;
+      $this->session = $session;
     }
     /**
      * {@inheritdoc}
@@ -42,7 +44,7 @@ class JqueryTinymceType extends TextareaType
       $options = parent::getDefaultOptions($options);
       $options['theme'] = isset($this->tinymce['theme']) ? $this->tinymce['theme'] : 'simple';
       //disable required option because html5 dind't parse tinymce input
-      $options['required'] = false;
+      //$options['required'] = false;
       return $options;
     }
 
@@ -62,6 +64,7 @@ class JqueryTinymceType extends TextareaType
         $view
             ->set('jquery_tinymce_asset', $this->tinymce['source'])
             ->set('theme', $form->getAttribute('theme'))
+            ->set('locale', $this->session->getLocale() )
         ;
     }
 }
