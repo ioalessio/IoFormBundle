@@ -73,7 +73,7 @@ class JqueryTinymceType extends TextareaType
         $view
             ->set('jquery_tinymce_asset', $this->tinymce['source'])
             ->set('theme', $form->getAttribute('theme'))
-            ->set('locale', $this->session->getLocale() )
+            ->set('locale', $this->session->getLocale())
         ;
     }
 }
