@@ -26,11 +26,21 @@
 {% spaceless %}
     {% if widget == 'single_text' %}
         {{ block('field_widget') }}
+
+{#
+          <script src="http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/jquery.ui.datepicker-it.js" ></script>
+#}
           <script>
           $(function() {
             $( "#{{ id }}" ).datepicker({
-                dateFormat: '{{ date_format }}'
+                dateFormat: '{{ date_format }}',
+                changeMonth: {{ change_month }},
+                changeYear:  {{ change_year }},
+                minDate:  '{{ min_date }}',
+                maxDate:  '{{ max_date }}',
+                showOn: "button"
               });
+ {#             $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "it" ] );#}
           });
           </script>
     {% else %}
