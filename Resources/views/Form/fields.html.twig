@@ -1,3 +1,12 @@
+{#
+ # This file is part of the IoFormBundle package
+ #
+ # (c) Alessio Baglio <io.alessio@gmail.com>
+ #
+ # For the full copyright and license information, please view the LICENSE
+ # file that was distributed with this source code.
+ #}
+
 {% use 'form_div_layout.html.twig' %}
 
 {# put a small description here #}
@@ -105,14 +114,13 @@
 {% spaceless %}
 {
                 // Location of TinyMCE script
-                {# TODO: must use a configurable value for tinymce js asset #}
                 script_url : '{{ jquery_tinymce_asset }}',
-                {#language : "{{ locale }}" didn't work if you haven't right localization #}
+                language : "{{ locale }}" ,
                 // General options
                 theme : "{{ theme }}",
 
+                {# TODO: must use a configurable value for tinymce options #}
                 plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",
-
                 // Theme options
                 theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
                 theme_advanced_buttons2 : "search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code,forecolor,backcolor",
