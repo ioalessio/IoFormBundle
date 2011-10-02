@@ -70,7 +70,10 @@ How to use Form Type
     }
 
  Several options are available on jquery_date widget
+<<<<<<< HEAD
   'format' => 'dd/MM/y'  'dd.MM.yy' 'd MMM, y'
+=======
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
   'changeMonth'=> 'true',
   'changeYear' => true,
   'minDate'=> '-1y',

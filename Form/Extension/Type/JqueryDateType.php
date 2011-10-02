@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\Session;
 
 class JqueryDateType extends DateType
@@ -26,10 +27,20 @@ class JqueryDateType extends DateType
     {
       $this->session = $session;
     }
+=======
+
+class JqueryDateType extends DateType {
+
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilder $builder, array $options) {
+<<<<<<< HEAD
+=======
+        $format = $options['format'];
+
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
 
         $changemonth = $options['changeMonth'];
         $changeyear = $options['changeYear'];
@@ -40,7 +51,11 @@ class JqueryDateType extends DateType
         $builder->setAttribute('changeyear', $changeyear);
         $builder->setAttribute('mindate', $mindate);
         $builder->setAttribute('maxdate', $maxdate);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
         parent::buildForm($builder, $options);
     }
 
@@ -52,22 +67,25 @@ class JqueryDateType extends DateType
         $options['changeYear'] = 'false';
         $options['minDate'] = null;
         $options['maxDate'] = null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
         return $options;
     }
 
-   /**
+    /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
+    public function getName() {
         return 'jquery_date';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildViewBottomUp(FormView $view, FormInterface $form)
-    {
+    public function buildViewBottomUp(FormView $view, FormInterface $form) {
+
         $view->set('widget', $form->getAttribute('widget'));
 
         $pattern = $form->getAttribute('formatter')->getPattern();
@@ -101,19 +119,39 @@ class JqueryDateType extends DateType
         //jquery use a different syntax, have to replace
         //  php    jquery
         //  MM      mm
+<<<<<<< HEAD
         //  MMM     M
         //  MMMM    MM
         //  y       yy
+=======
+        //  MMM     M 
+        //  MMMM    MM
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
 
         if (strpos($format, "MMM") > 0) {
             $format = str_replace("MMM", "M", $format);
         } else {
             $format = str_replace("MM", "mm", $format);
         }
-        $format = str_replace("LLL", "M", $format);
-        $format = str_replace("y", "yy", $format);
+<<<<<<< HEAD
+=======
 
+
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
+        $format = str_replace("LLL", "M", $format);
+        $format = str_replace("yy", "y", $format);
+
+<<<<<<< HEAD
        return $format;
+=======
+
+        $view->set('date_pattern', $pattern);
+        $view->set('date_format', $format);
+        $view->set('change_month', $form->getAttribute('changemonth'));
+        $view->set('change_year', $form->getAttribute('changeyear'));
+        $view->set('min_date', $form->getAttribute('mindate'));
+        $view->set('max_date', $form->getAttribute('maxdate'));
+>>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
     }
 
 }
