@@ -66,6 +66,15 @@ How to use Form Type
             ->add('date', 'jquery_date', array('format' => 'dd/MM/y')
             ->add('int_field', 'jquery_range', array('min' => 0, 'max' => 50, 'step' => 2)
             ->add('note', 'jquery_tinymce')
+            ->add('customer', 'jquery_entity_autocomplete', array(
+                'class' => 'Io\MyBundle\Entity\Customer',
+                'query_builder' => function(CustomerRepository $er) {
+                    return $er->findAllCustomersForUserQuery()
+                    ;
+                },
+                'source' => 'search_customer_for_user',
+                'minlength' => 1,        
+            ));
         );
     }
 
