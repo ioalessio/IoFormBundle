@@ -41,16 +41,9 @@
             $( "#{{ id }}" ).datepicker({
                 dateFormat: '{{ date_format }}',
                 changeMonth: {{ change_month }},
-<<<<<<< HEAD
                 changeYear:  {{ change_year }},
                 minDate:  '{{ min_date }}',
                 maxDate:  '{{ max_date }}',
-                showOn: "button"
-=======
-		changeYear:  {{ change_year }},
-		minDate:  '{{ min_date }}',
-		maxDate:  '{{ max_date }}',
->>>>>>> c62a953aa8286139f9ec8605849dcf9a9c208081
               });
              $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "{{locale}}" ] );
           });
