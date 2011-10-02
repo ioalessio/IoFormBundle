@@ -45,16 +45,12 @@
     {# put this code in a appropriate block #}
     <script type="text/javascript">
       $(function(){
-      	$( "#{{ id }}" ).autocomplete({
-			source: '{{ source }}',
-			minLength: {{ minlength }},
-			select: function( event, ui ) {
-				log( ui.item ?
-					"Selected: " + ui.item.value + " aka " + ui.item.id :
-					"Nothing selected, input was " + this.value );
-			}
-        );
-     });
+      	$("#{{ id }}").comboentity({
+                        source: Routing.generate('{{source}}'),
+			minLength: '{{ minlength }}'
+                        });
+        
+      });
     </script>
 {% endspaceless %}
 {% endblock jquery_entity_autocomplete_widget %}   
