@@ -33,7 +33,7 @@
     
  {# autocomplete entity based #}
 {% block jquery_entity_autocomplete_widget %}
-
+<div class="autocompleteentity">
   {{ block('choice_widget') }}
   {% spaceless %}
   {# put this css in a appropriate block or external file #}
@@ -52,6 +52,7 @@
         
       });
     </script>
+</div>
 {% endspaceless %}
 {% endblock jquery_entity_autocomplete_widget %}   
     
