@@ -1,0 +1,41 @@
+services:
+    # entity_id type
+    entity_id.type:
+        class: Io\FormBundle\Form\Extension\Type\EntityIdType
+        arguments: [@doctrine]
+        tags:
+            - { name: form.type, alias: entity_id }
+
+    # jquery_entity_combobox type
+    jquery_entity_combobox.type:
+        class: Io\FormBundle\Form\Extension\Type\JqueryEntityComboboxType
+        arguments: [@doctrine]
+        tags:
+            - { name: form.type, alias: jquery_entity_combobox }
+
+    # jquery_date type
+    jquery_date.type:
+        class: Io\FormBundle\Form\Extension\Type\JqueryDateType
+        arguments: [@session]
+        tags:
+            - { name: form.type, alias: jquery_date }
+
+    # jquery_tinymce type
+    jquery_tinymce.type:
+        class: Io\FormBundle\Form\Extension\Type\JqueryTinymceType
+        arguments: [ %io_form.jquery_tinymce% , @session]
+        tags:
+            - { name: form.type, alias: jquery_tinymce }
+
+    # jquery_radio type
+    jquery_radio.type:
+        class: Io\FormBundle\Form\Extension\Type\JqueryRadioType
+        tags:
+            - { name: form.type, alias: jquery_radio }
+
+    # jquery_range type
+    jquery_range.type:
+        class: Io\FormBundle\Form\Extension\Type\JqueryRangeType
+        tags:
+            - { name: form.type, alias: jquery_range }
+
