@@ -23,7 +23,6 @@
     {# put this code in a appropriate block #}
     <script type="text/javascript">
       $(function(){
-        $( "#{{ id }}" ).autocomplete();
       	$( "#{{ id }}" ).combobox();
      });
     </script>
@@ -31,6 +30,34 @@
 {% endblock jquery_entity_combobox_widget %}
 
 
+    
+ {# autocomplete entity based #}
+{% block jquery_entity_autocomplete_widget %}
+<div class="autocompleteentity">
+  {{ block('choice_widget') }}
+  {% spaceless %}
+  {# put this css in a appropriate block or external file #}
+  <style>
+	.ui-button { margin-left: -1px; }
+	.ui-button-icon-only .ui-button-text { padding: 0.35em; }
+	.ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
+	</style>
+    {# put this code in a appropriate block #}
+    <script type="text/javascript">
+      $(function(){
+      	$("#{{ id }}").comboentity({
+                        source: Routing.generate('{{source}}'),
+			minLength: '{{ minlength }}'
+                        });
+        
+      });
+    </script>
+</div>
+{% endspaceless %}
+{% endblock jquery_entity_autocomplete_widget %}   
+    
+    
+    
 {% block jquery_date_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}
@@ -41,10 +68,9 @@
             $( "#{{ id }}" ).datepicker({
                 dateFormat: '{{ date_format }}',
                 changeMonth: {{ change_month }},
-                changeYear:  {{ change_year }},
-                minDate:  '{{ min_date }}',
-                maxDate:  '{{ max_date }}',
-                showOn: "button"
+                changeYear: {{ change_year }},
+                minDate: '{{ min_date }}',
+                maxDate: '{{ max_date }}',
               });
              $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "{{locale}}" ] );
           });

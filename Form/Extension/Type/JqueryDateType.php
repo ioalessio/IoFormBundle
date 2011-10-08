@@ -26,11 +26,12 @@ class JqueryDateType extends DateType
     {
       $this->session = $session;
     }
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilder $builder, array $options) {
-
+        $format = $options['format'];
         $changemonth = $options['changeMonth'];
         $changeyear = $options['changeYear'];
         $mindate = $options['minDate'];
@@ -40,7 +41,6 @@ class JqueryDateType extends DateType
         $builder->setAttribute('changeyear', $changeyear);
         $builder->setAttribute('mindate', $mindate);
         $builder->setAttribute('maxdate', $maxdate);
-
         parent::buildForm($builder, $options);
     }
 
@@ -55,19 +55,18 @@ class JqueryDateType extends DateType
         return $options;
     }
 
-   /**
+    /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
+    public function getName() {
         return 'jquery_date';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildViewBottomUp(FormView $view, FormInterface $form)
-    {
+    public function buildViewBottomUp(FormView $view, FormInterface $form) {
+
         $view->set('widget', $form->getAttribute('widget'));
 
         $pattern = $form->getAttribute('formatter')->getPattern();
@@ -111,9 +110,10 @@ class JqueryDateType extends DateType
             $format = str_replace("MM", "mm", $format);
         }
         $format = str_replace("LLL", "M", $format);
-        $format = str_replace("y", "yy", $format);
+        $format = str_replace("yy", "y", $format);
 
        return $format;
+
     }
 
 }
