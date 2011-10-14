@@ -76,6 +76,15 @@ How to use Form Type
   'minDate'=> '-1y',
   'maxDate'=> '+1y'
 
+ Using the autocomplete entity widget:
+    - The widget needs the options:
+        - class
+        - property (the property that will be used to make the mapping between the received value and the database value)
+        - url: the url that will return a json list of possible elements
+        - callback: the name of a javascript function used to transform the received json to the format used by jQuery auto complete (if needed, otherwise a default callback is provided)
+
+The JSON data should be a list of objects. In order to use the default callback, it must be formatted like: `[ {"label": <first object label>, "id": <first object id>}, {... }, ...]`
+
 THAT'S ALL
 ==========
 
