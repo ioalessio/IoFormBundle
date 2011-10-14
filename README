@@ -53,9 +53,6 @@ How to Install
               source: /bundles/yourbundle/js/tiny_mce/tiny_mce.js
               theme:  simple
 
-  5. Publish the assets to your web folder, run:
-      
-        php app/console assets:install
 
 How to use Form Type
 ====================
