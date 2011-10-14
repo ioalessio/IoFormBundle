@@ -84,6 +84,9 @@ How to use Form Type
         - callback: the name of a javascript function used to transform the received json to the format used by jQuery auto complete (if needed, otherwise a default callback is provided)
 
 The JSON data should be a list of objects. In order to use the default callback, it must be formatted like: `[ {"label": <first object label>, "id": <first object id>}, {... }, ...]`
+jQuery needs at least the label.
+jQuery can take a second parameter: value (this will be set in the field instead of the label)
+This bundle requires at least the 'property' used for mapping Entities to the form value (id for example).
 
 THAT'S ALL
 ==========

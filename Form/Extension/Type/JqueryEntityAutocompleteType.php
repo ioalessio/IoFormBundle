@@ -12,6 +12,7 @@ class JqueryEntityAutocompleteType extends EntityIdType
     {
         $builder->setAttribute('url', $options['url']);
         $builder->setAttribute('callback', $options['callback']);
+        $builder->setAttribute('property', $options['property']);
         $builder->add('test', 'text');
 
         parent::buildForm($builder, $options);
@@ -40,5 +41,6 @@ class JqueryEntityAutocompleteType extends EntityIdType
         parent::buildViewBottomUp($view, $form);
         $view->set('url', $form->getAttribute('url'));
         $view->set('callback', $form->getAttribute('callback'));
+        $view->set('property', $form->getAttribute('property'));
     }
 }
