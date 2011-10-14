@@ -55,7 +55,7 @@ How to Install
 
   5. Publish the assets to your web folder, run:
       
-      php app/console assets:install
+        php app/console assets:install
 
 How to use Form Type
 ====================
