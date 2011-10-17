@@ -76,8 +76,8 @@ The JSON should be an array of objects where each object should provide:
 
 Example:
 
-  [
-  {% for band in bands %}
-      { "label": "{{ band.name }}", "id": "{{ band.id }}" } {{ loop.last ? '' : ',' }}
-  {% endfor %}
-  ]
+      [
+      {% for band in bands %}
+          { "label": "{{ band.name }}", "id": "{{ band.id }}" } {{ loop.last ? '' : ',' }}
+      {% endfor %}
+      ]
