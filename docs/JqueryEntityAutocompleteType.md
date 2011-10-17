@@ -27,8 +27,8 @@ So far there is no default search action for this widget. The widget requires a 
 
 In the form class, you add this field like "any other" and pass it the needed parameters:
 
-  class AlbumType extends AbstractType
-  {
+    class AlbumType extends AbstractType
+    {
       public function buildForm(FormBuilder $builder, array $options)
       {
           $builder
@@ -38,6 +38,9 @@ In the form class, you add this field like "any other" and pass it the needed pa
                   'url' => $router->generateUrl('band_search', array('search_term', '$$term$$')),
                   'callback' => 'acme.callback'
               ))
+      }
+      // ...
+    }
               
 Arguments:
 - class: Similar to what you'd do for a standard EntityType
