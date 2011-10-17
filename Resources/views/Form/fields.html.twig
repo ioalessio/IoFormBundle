@@ -51,7 +51,7 @@
                 {% if not callback %}
                     $.get( url, function(data) {callback(data, cb)});
                 {% else %}
-                    $.get( url, function(data){ {{callback}}(data, cb)});
+                    $.get( url, function(data){ {{callback|raw}}(data, cb)});
                 {% endif %}
 
             },
