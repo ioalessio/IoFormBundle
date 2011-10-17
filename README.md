@@ -76,6 +76,10 @@ How to use Form Type
   'minDate'=> '-1y',
   'maxDate'=> '+1y'
 
+More details on some types:
+
+- [JqueryEntityAutocompleteType](docs/JqueryEntityAutocompleteType.md)
+
 THAT'S ALL
 ==========
 

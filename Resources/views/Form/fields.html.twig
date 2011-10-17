@@ -28,8 +28,41 @@
      });
     </script>
 {% endspaceless %}
+
 {% endblock jquery_entity_combobox_widget %}
 
+{% block jquery_entity_autocomplete_widget %}
+    {{ block('hidden_widget') }}
+    {% set entity_id = id %}
+    {% set id = id~'_text' %}
+    {% set full_name = '' %}
+    {{ block('field_widget') }}
+    {% spaceless %}
+    <script type="text/javascript">
+      $(function(){
+        {% if not callback %}
+          function callback(data, cb){
+              cb(data);
+          }
+        {% endif %}
+        $( "#{{ id }}" ).autocomplete({
+            source: function(request, cb){
+                var url = "{{ url }}".replace('$$term$$', request.term);
+                {% if not callback %}
+                    $.get( url, function(data) {callback(data, cb)});
+                {% else %}
+                    $.get( url, function(data){ {{callback|raw}}(data, cb)});
+                {% endif %}
+
+            },
+            select: function(event, ui){
+                $('#{{entity_id}}').val(ui.item.id);
+            }
+        });
+     });
+    </script>
+    {% endspaceless %}
+{% endblock %}
 
 {% block jquery_date_widget %}
 {% spaceless %}
