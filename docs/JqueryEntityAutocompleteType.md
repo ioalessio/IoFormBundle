@@ -71,6 +71,7 @@ For this to work you'll need a search action. In your controller, it could be as
 
 If you did not provide your own callback function, then the default callback expects to retrieve data as a JSON string.
 The JSON should be an array of objects where each object should provide:
+
 - label
 - property specified in the form class
 
