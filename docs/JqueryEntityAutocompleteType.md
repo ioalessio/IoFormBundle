@@ -33,27 +33,27 @@ In the form class, you add this field like "any other" and pass it the needed pa
       {
           $builder
               ->add('band', 'jquery_entity_autocomplete', array(
-                  'class' => 'AcmeMusicBundle:Band',  
-                  'property' => 'id',
-                  'url' => $router->generateUrl('band_search', array('search_term', '$$term$$')),
+                  'class' => 'AcmeMusicBundle:Band',
+                  'property' => 'slug',  // insert HERE fieldlabel
+                  'url' => 'band_search' // insert ROUTENAME, autocompleteType will generate url
                   'callback' => 'acme.callback'
               ))
       }
       // ...
     }
-              
+
 Arguments:
 - class: Similar to what you'd do for a standard EntityType
 - property: the class property that will be hidden in the form with its value in order to be able to retrieve the entity when the form is submitted. It should absolutely be a UNIQUE field.
-- url: The url where the search term will be sent and the filtered data retrieved. It MUST include '$$term$$' which will be replaced by the actual search content.
-- callback: If you wish to customize what jQuery will do with the data retrieved from the url, you can write your own JS callback function. Put its name here to reference it. A default callback is provided if the 
+- url: The url where the search term will be sent and the filtered data retrieved.
+- callback: If you wish to customize what jQuery will do with the data retrieved from the url, you can write your own JS callback function. Put its name here to reference it. A default callback is provided if the
 
 ### Search / Filter action
 
 For this to work you'll need a search action. In your controller, it could be as simple as:
 
     /**
-     * @Route("/search/{search}.{_format}", name="band_search")
+     * @Route("/search/{search}.{_format}", name="band_search", defaults="{"_format": "json"})
      * @Template()
      * @param $search
      */
@@ -66,7 +66,7 @@ For this to work you'll need a search action. In your controller, it could be as
 
         return array('bands' => $bands);
     }
-    
+
 ### Result format
 
 If you did not provide your own callback function, then the default callback expects to retrieve data as a JSON string.
@@ -79,6 +79,8 @@ Example:
 
       [
       {% for band in bands %}
-          { "label": "{{ band.name }}", "id": "{{ band.id }}" } {{ loop.last ? '' : ',' }}
+          { "label": "{{ band.name }}",
+            "desc": {{ band.desc }},
+            "id": "{{ band.id }}" } {{ loop.last ? '' : ',' }}
       {% endfor %}
       ]

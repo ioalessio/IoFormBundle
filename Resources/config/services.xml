@@ -20,12 +20,21 @@
       </service>
         <service id="form.type.jquery_entity_autocomplete" class="Io\FormBundle\Form\Extension\Type\JqueryEntityAutocompleteType">
           <argument type="service" id="doctrine" />
+            <argument type="service" id="session" />
+            <argument type="router" id="router" />
           <tag name="form.type" alias="jquery_entity_autocomplete" />
         </service>
+
+
       <service id="form.type.jquery_date" class="Io\FormBundle\Form\Extension\Type\JqueryDateType">
         <tag name="form.type" alias="jquery_date" />
             <argument type="service" id="session" />
       </service>
+      <service id="form.type.date_range" class="Io\FormBundle\Form\Extension\Type\DateRangeType">
+        <tag name="form.type" alias="date_range" />
+            <argument type="service" id="session" />
+      </service>
+
 
       <service id="form.type.jquery_range" class="Io\FormBundle\Form\Extension\Type\JqueryRangeType">
         <tag name="form.type" alias="jquery_range" />

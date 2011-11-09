@@ -15,7 +15,7 @@ services:
 # jquery_entity_combobox type
     jquery_entity_autocomplete.type:
         class: Io\FormBundle\Form\Extension\Type\JqueryEntityAutocompleteType
-        arguments: [@doctrine]
+        arguments: [@doctrine, @session, @router]
         tags:
             - { name: form.type, alias: jquery_entity_autocomplete }
 

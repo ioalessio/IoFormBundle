@@ -47,7 +47,7 @@
         {% endif %}
         $( "#{{ id }}" ).autocomplete({
             source: function(request, cb){
-                var url = "{{ url }}".replace('$$term$$', request.term);
+                var url = "{{ url }}".replace('%24%24term%24%24', request.term);
                 {% if not callback %}
                     $.get( url, function(data) {callback(data, cb)});
                 {% else %}
@@ -55,11 +55,22 @@
                 {% endif %}
 
             },
-            select: function(event, ui){
-                $('#{{entity_id}}').val(ui.item.id);
+            focus: function( event, ui ) {
+                    $( "#project" ).val( ui.item.label );
+                    return false;
+            },
+            select: function( event, ui ) {
+                    $( "#{{id}}" ).val( ui.item.label );
+                    $( "#{{entity_id}}" ).val( ui.item.label );
+                    return false;
             }
-        });
-     });
+
+        })
+        .data( "autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li></li>" ).data( "item.autocomplete", item ).append( "<a>" + item.desc + "</a>" ).appendTo( ul );
+		};
+
+	});
     </script>
     {% endspaceless %}
 {% endblock %}

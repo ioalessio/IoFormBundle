@@ -6,8 +6,20 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\Session;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
 class JqueryEntityAutocompleteType extends EntityIdType
 {
+
+    public function __construct(RegistryInterface $registry, Session $session, Router $router)
+    {
+      $this->registry = $registry;
+      $this->session = $session;
+      $this->router = $router;
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->setAttribute('url', $options['url']);
@@ -38,7 +50,7 @@ class JqueryEntityAutocompleteType extends EntityIdType
     public function buildViewBottomUp(FormView $view, FormInterface $form)
     {
         parent::buildViewBottomUp($view, $form);
-        $view->set('url', $form->getAttribute('url'));
+        $view->set('url', $this->router->generate($form->getAttribute('url'), array('search' => '$$term$$')) );
         $view->set('callback', $form->getAttribute('callback'));
         $view->set('property', $form->getAttribute('property'));
     }
