@@ -19,6 +19,13 @@ services:
         tags:
             - { name: form.type, alias: jquery_entity_autocomplete }
 
+    # date_range type
+    date_range.type:
+        class: Io\FormBundle\Form\Extension\Type\DateRangeType
+        arguments: [@session]
+        tags:
+            - { name: form.type, alias: date_range }
+
     # jquery_date type
     jquery_date.type:
         class: Io\FormBundle\Form\Extension\Type\JqueryDateType

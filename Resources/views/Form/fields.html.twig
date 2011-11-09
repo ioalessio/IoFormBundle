@@ -64,6 +64,11 @@
     {% endspaceless %}
 {% endblock %}
 
+{% block date_range_widget %}
+    {{ form_widget(form.start) }}
+    {{ form_widget(form.end) }}
+{% endblock %}
+
 {% block jquery_date_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}
