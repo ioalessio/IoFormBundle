@@ -60,7 +60,7 @@
             },
             select: function( event, ui ) {
                     $( "#{{id}}" ).val( ui.item.label );
-                    $( "#{{entity_id}}" ).val( ui.item.label ); {# i use label in hidden field because EntityIdType generate Id by property #}
+                    $( "#{{entity_id}}" ).val( ui.item.label ); {# i wish pass in hidden field item.id value but EntityIdType generate Id by property - @todo: render label on text field and id in hidden field #}
                     return false;
             }
 

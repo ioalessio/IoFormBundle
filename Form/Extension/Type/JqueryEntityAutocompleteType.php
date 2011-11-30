@@ -23,6 +23,7 @@ class JqueryEntityAutocompleteType extends EntityIdType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->setAttribute('url', $options['url']);
+        $builder->setAttribute('url_params', $options['url_params']);
         $builder->setAttribute('callback', $options['callback']);
         $builder->setAttribute('property', $options['property']);
 
@@ -33,8 +34,8 @@ class JqueryEntityAutocompleteType extends EntityIdType
     {
         $options = parent::getDefaultOptions($options);
         $options['multiple'] = false;
-        // jQuery will pass a single "term" variable. This url should include '$$term$$' that will be replaced while querying
         $options['url'] = false;
+        $options['url_params'] = array();
         $options['callback'] = false;
 
         //DEFAULT VALUE = NULL
@@ -50,7 +51,10 @@ class JqueryEntityAutocompleteType extends EntityIdType
     public function buildViewBottomUp(FormView $view, FormInterface $form)
     {
         parent::buildViewBottomUp($view, $form);
-        $view->set('url', $this->router->generate($form->getAttribute('url'), array('search' => '$$term$$')) );
+
+        $params = $form->getAttribute('url_params');
+        $params['search'] = '$$term$$';
+        $view->set('url', $this->router->generate($form->getAttribute('url'), $params) );
         $view->set('callback', $form->getAttribute('callback'));
         $view->set('property', $form->getAttribute('property'));
     }
