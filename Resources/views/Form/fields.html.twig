@@ -32,11 +32,10 @@
 {% endblock jquery_entity_combobox_widget %}
 
 {% block jquery_entity_autocomplete_widget %}
-    {{ block('hidden_widget') }}
-    {% set entity_id = id %}
-    {% set id = id~'_text' %}
-    {% set full_name = '' %}
-    {{ block('field_widget') }}
+    {{ block('hidden_widget') }} {# render hidden field #}
+    {% set entity_id = id %}     {# set hidden field's id as entity_id #}
+    {% set id = id~'_text' %}    {# set text field's id as id #}
+    {{ block('field_widget') }}  {# render text field #}
     {% spaceless %}
     <script type="text/javascript">
       $(function(){
@@ -48,20 +47,20 @@
         $( "#{{ id }}" ).autocomplete({
             source: function(request, cb){
                 var url = "{{ url }}".replace('%24%24term%24%24', request.term);
-                {% if not callback %}
-                    $.get( url, function(data) {callback(data, cb)});
-                {% else %}
+                {% if callback %}
                     $.get( url, function(data){ {{callback|raw}}(data, cb)});
+                {% else %}
+                    $.get( url, function(data) {callback(data, cb)});
                 {% endif %}
 
             },
             focus: function( event, ui ) {
-                    $( "#project" ).val( ui.item.label );
+                    $( "#{{id}}" ).val( ui.item.label );
                     return false;
             },
             select: function( event, ui ) {
                     $( "#{{id}}" ).val( ui.item.label );
-                    $( "#{{entity_id}}" ).val( ui.item.label );
+                    $( "#{{entity_id}}" ).val( ui.item.label ); {# i use label in hidden field because EntityIdType generate Id by property #}
                     return false;
             }
 
