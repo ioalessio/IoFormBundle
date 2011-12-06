@@ -8,14 +8,14 @@ use Symfony\Component\Form\FormView;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Session;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+//use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Form\AbstractType;
 
-class JqueryEntityAutocompleteType extends EntityIdType
+class JqueryAutocompleteType extends AbstractType
 {
 
-    public function __construct(RegistryInterface $registry, Session $session, Router $router)
+    public function __construct(Session $session, Router $router)
     {
-      $this->registry = $registry;
       $this->session = $session;
       $this->router = $router;
     }
@@ -26,7 +26,6 @@ class JqueryEntityAutocompleteType extends EntityIdType
         $builder->setAttribute('url_params', $options['url_params']);
         $builder->setAttribute('callback', $options['callback']);
         $builder->setAttribute('select_callback', $options['select_callback']);
-        $builder->setAttribute('property', $options['property']);
 
         parent::buildForm($builder, $options);
     }
@@ -34,20 +33,23 @@ class JqueryEntityAutocompleteType extends EntityIdType
     public function getDefaultOptions(array $options)
     {
         $options = parent::getDefaultOptions($options);
-        $options['multiple'] = false;
         $options['url'] = false;
         $options['url_params'] = array();
         $options['callback'] = false;
         $options['select_callback'] = false;
-
         //DEFAULT VALUE = NULL
         $options['empty_value'] = "";
         return $options;
     }
 
+    public function getParent(array $options)
+    {
+        return "text";
+    }
+
     public function getName()
     {
-        return 'jquery_entity_autocomplete';
+        return 'jquery_autocomplete';
     }
 
     public function buildViewBottomUp(FormView $view, FormInterface $form)
@@ -55,10 +57,9 @@ class JqueryEntityAutocompleteType extends EntityIdType
         parent::buildViewBottomUp($view, $form);
 
         $params = $form->getAttribute('url_params');
-        $params['search'] = '$$term$$';
+
         $view->set('url', $this->router->generate($form->getAttribute('url'), $params) );
         $view->set('callback', $form->getAttribute('callback'));
         $view->set('select_callback', $form->getAttribute('select_callback'));
-        $view->set('property', $form->getAttribute('property'));
     }
 }

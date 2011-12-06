@@ -31,6 +31,43 @@
 
 {% endblock jquery_entity_combobox_widget %}
 
+
+{% block jquery_autocomplete_widget %}
+
+    {{ block('field_widget') }}  {# render text field #}
+    {% spaceless %}
+    <script type="text/javascript">
+      $(function(){
+
+        $( "#{{ id }}" ).autocomplete({
+            minLength: 2,
+
+            source: "{{ url }}",
+
+            focus: function( event, ui ) {
+                    $( "#{{id}}" ).val( ui.item.value );
+                    return false;
+            },
+            select: function( event, ui ) {
+                    $( "#{{id}}" ).val( ui.item.value );
+                    {% if select_callback %}
+                        {{select_callback|raw}}(event, ui);
+                    {% endif %}
+                    return false;
+            }
+
+        })
+        .data( "autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li></li>" ).data( "item.autocomplete", item ).append( "<a>" + item.desc + "</a>" ).appendTo( ul );
+		};
+
+	});
+    </script>
+    {% endspaceless %}
+{% endblock %}
+
+
+
 {% block jquery_entity_autocomplete_widget %}
     {{ block('hidden_widget') }} {# render hidden field #}
     {% set entity_id = id %}     {# set hidden field's id as entity_id #}
@@ -61,6 +98,9 @@
             select: function( event, ui ) {
                     $( "#{{id}}" ).val( ui.item.label );
                     $( "#{{entity_id}}" ).val( ui.item.label ); {# i wish pass in hidden field item.id value but EntityIdType generate Id by property - @todo: render label on text field and id in hidden field #}
+                    {% if select_callback %}
+                        {{select_callback|raw}}(event, ui);
+                    {% endif %}
                     return false;
             }
 

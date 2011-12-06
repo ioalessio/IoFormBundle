@@ -12,12 +12,18 @@ services:
         arguments: [@doctrine]
         tags:
             - { name: form.type, alias: jquery_entity_combobox }
-# jquery_entity_combobox type
+    # jquery_autocomplete type
     jquery_entity_autocomplete.type:
         class: Io\FormBundle\Form\Extension\Type\JqueryEntityAutocompleteType
         arguments: [@doctrine, @session, @router]
         tags:
             - { name: form.type, alias: jquery_entity_autocomplete }
+
+    jquery_autocomplete.type:
+        class: Io\FormBundle\Form\Extension\Type\JqueryAutocompleteType
+        arguments: [@session, @router]
+        tags:
+            - { name: form.type, alias: jquery_autocomplete }
 
     # date_range type
     date_range.type:
