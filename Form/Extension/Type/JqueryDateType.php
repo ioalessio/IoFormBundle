@@ -35,11 +35,13 @@ class JqueryDateType extends DateType
         $changeyear = $options['changeYear'];
         $mindate = $options['minDate'];
         $maxdate = $options['maxDate'];
+        $showon = $options['showOn'];
 
         $builder->setAttribute('changemonth', $changemonth);
         $builder->setAttribute('changeyear', $changeyear);
         $builder->setAttribute('mindate', $mindate);
         $builder->setAttribute('maxdate', $maxdate);
+        $builder->setAttribute('showon', $showon);
 
         parent::buildForm($builder, $options);
     }
@@ -52,6 +54,7 @@ class JqueryDateType extends DateType
         $options['changeYear'] = 'false';
         $options['minDate'] = null;
         $options['maxDate'] = null;
+        $options['showOn'] = null;
         return $options;
     }
 
@@ -92,6 +95,7 @@ class JqueryDateType extends DateType
         $view->set('change_year', $form->getAttribute('changeyear'));
         $view->set('min_date', $form->getAttribute('mindate'));
         $view->set('max_date', $form->getAttribute('maxdate'));
+        $view->set('show_on', $form->getAttribute('showon'));
         $view->set('locale',  $this->session->getLocale() );
     }
 
