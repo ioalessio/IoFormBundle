@@ -54,7 +54,7 @@ class JqueryDateType extends DateType
         $options['changeYear'] = 'false';
         $options['minDate'] = null;
         $options['maxDate'] = null;
-        $options['showOn'] = null;
+        $options['showOn'] = 'both';
         return $options;
     }
 
