@@ -12,20 +12,20 @@ How to Install
   target=/bundles/Io/FormBundle
 ```
 
-      Run the vendor script:
+ Run the vendor script:
 
 ```
-        ./bin/vendors install
+./bin/vendors install
 ```
 
-    * Submodule Mode
+ * Submodule Mode
 
 ```
-       $ git submodule add git://github.com/ioalessio/IoFormBundle.git vendor/bundles/Io/FormBundle
+$ git submodule add git://github.com/ioalessio/IoFormBundle.git vendor/bundles/Io/FormBundle
 ```
 
 
-  2. Add the "Io" namespace to your autoloader:
+ 2. Add the "Io" namespace to your autoloader:
 
 ```php
 <?php
