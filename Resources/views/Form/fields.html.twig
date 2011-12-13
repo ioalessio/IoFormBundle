@@ -127,12 +127,16 @@
           <script>
           $(function() {
             $( "#{{ id }}" ).datepicker({
-                dateFormat: '{{ date_format }}',
-                changeMonth: {{ change_month }},
-                changeYear:  {{ change_year }},
-                minDate:  '{{ min_date }}',
-                maxDate:  '{{ max_date }}',
-                showOn: "button"
+                dateFormat: '{{ dateFormat }}',
+              {% for key,value in jqdate_options %}
+                {{key}}: '{{value}}',
+              {% endfor %}
+                {#changeMonth: {{ change_month }},#}
+                {#changeYear: {{ change_year }},#}
+                {#minDate: '{{ min_date }}',#}
+                {#maxDate: '{{ max_date }}',#}
+                {#yearRange: '{{ year_range }}',#}
+                {#showOn: '{{ show_on }}'#}
               });
              $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "{{locale}}" ] );
           });
