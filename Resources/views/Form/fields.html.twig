@@ -134,7 +134,7 @@
                 maxDate:  '{{ max_date }}',
                 showOn: "button"
               });
-             $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "{{locale}}" ] );
+             $.datepicker.setDefaults( $.datepicker.regional[ "{{locale}}" ] );
           });
           </script>
     {% else %}
