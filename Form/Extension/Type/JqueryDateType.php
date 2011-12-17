@@ -19,6 +19,23 @@ use Symfony\Component\HttpFoundation\Session;
 
 class JqueryDateType extends DateType
 {
+    // only items in $valid_jquery_options will be added to the datepicker() call naturally
+    // prepend extra options with "jqd." to add extra options
+    // Example:
+    //     ... assuming changeMonth was not a standard option ...
+    //     $builder->addadd('dob', 'jquery_date', array('format' => 'dd/MM/y','jqd.changeMonth' => 'true')
+    //          this wil strip off the 'jqd.' and add to $valid_jquery_options
+
+    protected $valid_jquery_options = array(
+        'changeMonth', 'changeYear', 'minDate', 'maxDate', 'showOn', 'yearRange'
+    );
+
+    protected $default_jquery_options = array(
+        'changeMonth'       => 'false',
+        'changeYear'        => 'false',
+        'showOn'            => 'focus',
+    );
+
     /**
      * @param Session $session
      */
@@ -31,27 +48,46 @@ class JqueryDateType extends DateType
      */
     public function buildForm(FormBuilder $builder, array $options) {
 
-        $changemonth = $options['changeMonth'];
-        $changeyear = $options['changeYear'];
-        $mindate = $options['minDate'];
-        $maxdate = $options['maxDate'];
+        foreach ($options as $okey => $ovalue)
+        {
+            // if the option starts with "jqd." add it to the valid list and set an attribute
+            if ( strlen($okey) >=4 && substr($okey, 0, 4) == 'jqd.' )
+            {
+                $this->valid_jquery_options[] = $okey;
+                $builder->setAttribute($okey, $ovalue);
+            }
 
-        $builder->setAttribute('changemonth', $changemonth);
-        $builder->setAttribute('changeyear', $changeyear);
-        $builder->setAttribute('mindate', $mindate);
-        $builder->setAttribute('maxdate', $maxdate);
+            // if the option is in the valid list, add/set an attribute
+            if (array_search($okey, $this->valid_jquery_options))
+            {
+                $builder->setAttribute($okey, $ovalue);
+            }
+        }
 
         parent::buildForm($builder, $options);
     }
 
     public function getDefaultOptions(array $options) {
+        $originaloptions = $options;
         $options = parent::getDefaultOptions($options);
         //Works only with single text
         $options['widget'] = 'single_text';
-        $options['changeMonth'] = 'false';
-        $options['changeYear'] = 'false';
-        $options['minDate'] = null;
-        $options['maxDate'] = null;
+
+        // loop through our defined defaults and set them
+        foreach ($this->default_jquery_options as $dkey=>$dvalue)
+        {
+            $options[$dkey] = $dvalue;
+        }
+
+        // set a default for any passed options that do not have defaults - prevents kaboom for on-the-fly options
+        foreach ($originaloptions as $key=>$value)
+        {
+            if (!isset($options[$key]))
+            {
+                $options[$key] = null;
+            }
+        }
+
         return $options;
     }
 
@@ -87,11 +123,32 @@ class JqueryDateType extends DateType
 
 
         $view->set('date_pattern', $pattern);
-        $view->set('date_format', $this->convertJqueryDate($pattern));
-        $view->set('change_month', $form->getAttribute('changemonth'));
-        $view->set('change_year', $form->getAttribute('changeyear'));
-        $view->set('min_date', $form->getAttribute('mindate'));
-        $view->set('max_date', $form->getAttribute('maxdate'));
+        $view->set('dateFormat', $this->convertJqueryDate($pattern));
+
+        // initialize an empty array for jqdate options (except dateFormat -- that's handled above)
+        $jqdate_options = array();
+
+        foreach ( $this->valid_jquery_options as $okey )
+        {
+            if ($form->hasAttribute( $okey ))
+            {
+                // if the option starts with "jqd." strip it off and just use the rest
+                if ( strlen($okey) >= 4 && substr($okey, 0, 4) == 'jqd.' )
+                {
+                    $jqdate_options[substr($okey,4)] = $form->getAttribute($okey);
+                }
+                else
+                {
+                    $jqdate_options[$okey] = $form->getAttribute( $okey );
+                }
+
+            }
+
+        }
+
+        // add our options array to the view.  we'll loop through this and add all of it to the datepicker() call
+        $view->set('jqdate_options', $jqdate_options);
+
         $view->set('locale',  $this->session->getLocale() );
     }
 
