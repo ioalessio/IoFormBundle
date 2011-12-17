@@ -138,7 +138,7 @@
                 {#yearRange: '{{ year_range }}',#}
                 {#showOn: '{{ show_on }}'#}
               });
-             $( "#{{ id }}" ).datepicker( $.datepicker.regional[ "{{locale}}" ] );
+             $( "#{{ id }}" ).datepicker("option", $.datepicker.regional[ "{{locale}}" ] );
           });
           </script>
     {% else %}
