@@ -122,7 +122,7 @@ $( "#wn_trackingbundle_resulttype_date" ).datepicker({
 
 More details on some types:
 
-- [JqueryEntityAutocompleteType](docs/JqueryEntityAutocompleteType.md)
+- [JqueryEntityAutocompleteType](https://github.com/ioalessio/IoFormBundle/blob/master/docs/JqueryEntityAutocompleteType.md)
 
 THAT'S ALL
 ==========
