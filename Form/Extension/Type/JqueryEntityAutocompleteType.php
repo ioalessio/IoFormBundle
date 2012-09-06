@@ -2,13 +2,14 @@
 
 namespace Io\FormBundle\Form\Extension\Type;
 
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Session;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class JqueryEntityAutocompleteType extends EntityIdType
 {
@@ -20,7 +21,7 @@ class JqueryEntityAutocompleteType extends EntityIdType
       $this->router = $router;
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setAttribute('url', $options['url']);
         $builder->setAttribute('url_params', $options['url_params']);
@@ -31,18 +32,17 @@ class JqueryEntityAutocompleteType extends EntityIdType
         parent::buildForm($builder, $options);
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $options = parent::getDefaultOptions($options);
-        $options['multiple'] = false;
-        $options['url'] = false;
-        $options['url_params'] = array();
-        $options['callback'] = false;
-        $options['select_callback'] = false;
-
-        //DEFAULT VALUE = NULL
-        $options['empty_value'] = "";
-        return $options;
+		parent::setDefaultOptions ($resolver);
+        $resolver->setDefaults (array (
+			'multiple' => false,
+			'url' => false,
+			'url_params' => array(),
+			'callback' => false,
+			'select_callback' => false,
+			'empty_value' => ''
+		));
     }
 
     public function getName()

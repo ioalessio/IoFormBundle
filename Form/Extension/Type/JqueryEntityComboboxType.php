@@ -11,6 +11,7 @@
 
 namespace Io\FormBundle\Form\Extension\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Render a Jquery Combobox Select of an entity
@@ -24,13 +25,12 @@ class JqueryEntityComboboxType extends EntityType
     return "jquery_entity_combobox";
   }
 
-  public function getDefaultOptions(array $options)
+  public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
-    $options = parent::getDefaultOptions($options);
-    $options['multiple'] = false;
-
-    //DEFAULT VALUE = NULL
-    $options['empty_value'] = "";
-    return $options;
+    parent::setDefaultOptions ($resolver);
+    $resolver->setDefaults (array (
+	  'multiple' => false,
+	  'empty_value' => ''
+	));
   }
 }

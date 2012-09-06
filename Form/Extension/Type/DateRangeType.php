@@ -14,8 +14,9 @@ namespace Io\FormBundle\Form\Extension\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 //use Symfony\Component\Form\Extension\Core\Type\DateType;
 //use Io\FormBundle\Form\Extension\Type\JqueryDateType;
 
@@ -31,7 +32,7 @@ class DateRangeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $type = $options['date_type'];
 //        unset($options['date_type']);
@@ -52,15 +53,16 @@ class DateRangeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->set('widget', $form->getAttribute('widget'));
     }
 
 
-    public function getDefaultOptions(array $options) {
-
-        return array(
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+		parent::setDefaultOptions ($resolver);
+        $resolver->setDefaults (array (
             'years'          => range(date('Y') - 5, date('Y') + 5),
             'months'         => range(1, 12),
             'days'           => range(1, 31),
@@ -75,7 +77,7 @@ class DateRangeType extends AbstractType
             'by_reference'   => false,
             'error_bubbling' => false,
             'date_type' => 'jquery_date'
-        );
+        ));
 
     }
 
@@ -109,7 +111,7 @@ class DateRangeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent(array $options)
+    public function getParent()
     {
         return 'form';
     }

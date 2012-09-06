@@ -2,7 +2,7 @@
 
 namespace Io\FormBundle\Form\Extension\Type;
 
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Session;
 //use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class JqueryAutocompleteType extends AbstractType
 {
@@ -20,7 +21,7 @@ class JqueryAutocompleteType extends AbstractType
       $this->router = $router;
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setAttribute('url', $options['url']);
         $builder->setAttribute('url_params', $options['url_params']);
@@ -30,19 +31,19 @@ class JqueryAutocompleteType extends AbstractType
         parent::buildForm($builder, $options);
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $options = parent::getDefaultOptions($options);
-        $options['url'] = false;
-        $options['url_params'] = array();
-        $options['callback'] = false;
-        $options['select_callback'] = false;
-        //DEFAULT VALUE = NULL
-        $options['empty_value'] = "";
-        return $options;
+		parent::setDefaultOptions ($resolver);
+        $resolver->setDefaults (array (
+			'url' => false,
+			'url_params' => array(),
+			'callback' => false,
+			'select_callback' => false,
+			'empty_value' => ''
+		));
     }
 
-    public function getParent(array $options)
+    public function getParent()
     {
         return "text";
     }

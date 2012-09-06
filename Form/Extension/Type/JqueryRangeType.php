@@ -12,10 +12,10 @@
 namespace Io\FormBundle\Form\Extension\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class JqueryRangeType extends IntegerType
 {
@@ -27,7 +27,7 @@ class JqueryRangeType extends IntegerType
         return 'jquery_range';
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
       parent::buildForm($builder, $options);
 
@@ -40,7 +40,7 @@ class JqueryRangeType extends IntegerType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view
             ->set('min', $form->getAttribute('min'))
@@ -48,9 +48,10 @@ class JqueryRangeType extends IntegerType
             ->set('step', $form->getAttribute('step'))
         ;
     }
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+		parent::setDefaultOptions ($resolver);
+        $resolver->setDefaults (array (
             // default precision is locale specific (usually around 3)
             'precision'     => null,
             'grouping'      => false,
@@ -62,7 +63,7 @@ class JqueryRangeType extends IntegerType
             'max' => 100,
             //step value (for jquery slide)
             'step' => 1
-        );
+        ));
     }
 
 

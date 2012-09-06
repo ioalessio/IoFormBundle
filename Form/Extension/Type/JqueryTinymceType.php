@@ -13,10 +13,11 @@ namespace Io\FormBundle\Form\Extension\Type;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * TODO:
@@ -36,7 +37,7 @@ class JqueryTinymceType extends TextareaType
     /**
      * {@inheritdoc}
      */
-    public function getParent(array $options)
+    public function getParent()
     {
         return 'textarea';
     }
@@ -48,16 +49,16 @@ class JqueryTinymceType extends TextareaType
         return 'jquery_tinymce';
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-      $options = parent::getDefaultOptions($options);
-      $options['theme'] = isset($this->tinymce['theme']) ? $this->tinymce['theme'] : 'simple';
-      //disable required option because html5 dind't parse tinymce input
-      $options['required'] = false;
-      return $options;
+		parent::setDefaultOptions ($resolver);
+        $resolver->setDefaults (array (
+			'theme' => isset($this->tinymce['theme']) ? $this->tinymce['theme'] : 'simple',
+			'required' => false //disable required option because html5 dind't parse tinymce input
+		));
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
       parent::buildForm($builder, $options);
 
@@ -68,7 +69,7 @@ class JqueryTinymceType extends TextareaType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view
             ->set('jquery_tinymce_asset', $this->tinymce['source'])

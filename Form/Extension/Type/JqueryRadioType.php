@@ -13,7 +13,7 @@ namespace Io\FormBundle\Form\Extension\Type;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class JqueryRadioType extends ChoiceType
 {
@@ -28,7 +28,7 @@ class JqueryRadioType extends ChoiceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
       $options['expanded'] = true;
       $options['multiple'] = false;

@@ -14,8 +14,9 @@ namespace Io\FormBundle\Form\Extension\Type;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class JqueryDateType extends DateType
 {
@@ -46,7 +47,7 @@ class JqueryDateType extends DateType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
 
         foreach ($options as $okey => $ovalue)
         {
@@ -67,9 +68,9 @@ class JqueryDateType extends DateType
         parent::buildForm($builder, $options);
     }
 
-    public function getDefaultOptions(array $options) {
-        $originaloptions = $options;
-        $options = parent::getDefaultOptions($options);
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+		parent::setDefaultOptions ($resolver);
         //Works only with single text
         $options['widget'] = 'single_text';
 
@@ -87,6 +88,7 @@ class JqueryDateType extends DateType
                 $options[$key] = null;
             }
         }
+        $resolver->setDefaults ($options);
 
         return $options;
     }
