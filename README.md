@@ -1,3 +1,9 @@
+This bundle is no more developed, you can use this bundle for same functionality
+http://github.com/genemu/GenemuFormBundle
+
+
+===============================================
+
 A set of Form Types for symfony2 framework using JQuery
 
 How to Install
