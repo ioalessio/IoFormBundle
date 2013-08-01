@@ -37,8 +37,8 @@ class EntityIdType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 		$this->hidden = $options['hidden'];
-        $builder->prependClientTransformer(new OneEntityToIdTransformer(
-            $this->registry->getEntityManager($options['em']),
+        $builder->addViewTransformer(new OneEntityToIdTransformer(
+            $this->registry->getManager($options['em']),
             $options['class'],
             $options['property'],
             $options['query_builder']
