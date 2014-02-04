@@ -84,7 +84,7 @@ How to use Form Type
         $builder
             ->add('user', 'jquery_entity_combobox', array('class' => 'Io\MyBundle\Entity\MyEntity'))
             ->add('date', 'jquery_date', array('format' => 'dd/MM/y')
-            ->add('int_field', 'jquery_range', array('min' => 0, 'max' => 50, 'step' => 2)
+            ->add('int_field', 'jquery_range', array('min' => 0, 'max' => 50, 'step' => 2))
             ->add('note', 'jquery_tinymce')
         );
     }
