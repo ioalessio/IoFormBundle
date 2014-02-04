@@ -1,0 +1,27 @@
+{
+    "name": "io/form-bundle",
+    "version": "0.0.1",
+    "description": "Set of form types for symfony2 using jquery/ui, datepicker, slider, autocomplete/combobox Entity and more.. work in progress",
+    "keywords": ["form", "jquery"],
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/ioalessio/IoFormBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alessio",
+            "email": "io.alessio@gmail.com"
+        },
+        {
+            "name": "Symfony Community",
+            "homepage": "http://github.com/ioalessio/IoFormBundle/contributors"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "2.*",
+    },
+    "target-dir": "Io/FormBundle",
+    "autoload": {
+        "psr-0": { "Io\\FormBundle": "" }
+    }
+}
+
